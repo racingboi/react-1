@@ -1,0 +1,15 @@
+.link {
+  color: #1a1919; /* Màu xanh dương */
+  text-decoration: none; /* Bỏ gạch chân */
+  margin: 0 10px; /* Khoảng cách giữa các link */
+  font-size: 24px;
+}
+  
+.link:hover {
+  color: #000000; /* Màu khi hover */
+  text-decoration: underline; /* Thêm gạch chân khi hover */
+}
+.header{
+  text-align: center;
+  margin: 10px;
+}
