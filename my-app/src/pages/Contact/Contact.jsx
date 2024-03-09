@@ -1,15 +1,37 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Bounce, toast } from 'react-toastify';
+import ModalDuc from '../../component/Modal/Modal';
 
 function Contact() {
   const [fullName, setFullName] = useState('');
+  // tạo hàm điều hướng dưới tên navigate
+  const navigate = useNavigate();
   const [mssv, setMssv] = useState('');
   const [submittedData, setSubmittedData] = useState(null);
-
   const handleSaveChanges = () => {
-    // Cập nhật submittedData với dữ liệu mới
-    setSubmittedData({ fullName, mssv });
+   const user = {
+      'name' : fullName,
+      'mssv': mssv
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+    // lưu user vào localStorage
+    // setSubmittedData({ fullName, mssv });
+    toast.success('Sửa thành công!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+    navigate('/cv');
+    // chuyển trang đến /cv sau khi click save changes
+    
   };
-
   return (
     <div className="col-6 offset-3">
       <div className="card">
@@ -49,13 +71,6 @@ function Contact() {
           </div>
         </div>
       </div>
-      {/* Hiển thị dữ liệu đã submit */}
-      {submittedData && (
-        <div>
-          <p>Full Name: {submittedData.fullName}</p>
-          <p>MSSV: {submittedData.mssv}</p>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,26 +1,37 @@
-import React from 'react' 
+import React, { useCallback, useEffect, useState } from 'react' 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
+import ModalDuc from '../../component/Modal/Modal';
 export default function Cv() {
+  const storedUser = localStorage.getItem('user');
+  const [user, setUser] = useState(JSON.parse(storedUser));
+  // lấy dữ liệu trong localStorage
+ 
+  // chuyển từ chuối qua object(đối tượng) 
+  useEffect(() => {
+    setUser(JSON.parse(storedUser));
+  }, [user]); 
+  const printDocument = useCallback(() => {
+    window.print();
+  }, []);
+  
   return (
+    <div id="print-section">
+      
     <div className="container">
       <div className="team-single">
         <div className="row">
           <div className="col-lg-4 col-md-5 xs-margin-30px-bottom">
             <div className="team-single-img">
-              <img src="https://scontent-xsp2-1.xx.fbcdn.net/v/t39.30808-6/271687508_448485783593541_8314626224747176482_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=kxLeGXzviRsAX9IFy8j&_nc_ht=scontent-xsp2-1.xx&oh=00_AfBDmAju5d3T-C-SwOSlCjlvbRi9WBpiIQJWIZ7mlP6uWw&oe=65EBAF60" alt="" />
+              <img className='w-100' src="https://scontent.fbmv1-1.fna.fbcdn.net/v/t39.30808-1/271687508_448485783593541_8314626224747176482_n.jpg?stp=dst-jpg_p240x240&_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=XWBJXAzl72cAX-I6aoK&_nc_ht=scontent.fbmv1-1.fna&oh=00_AfDhOUh2okBLQ_cAtRrnaU1jgN_6D5lyhm2xAVUcbbLPbQ&oe=65F06A9A" alt="" />
             </div>
             <div className="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
-              <h4 className="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">Trương Công Đức</h4>
-              <p className="sm-width-95 sm-margin-auto">PK03303</p>
+              <h4 className="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">{ user.name}</h4>
+              <p className="sm-width-95 sm-margin-auto">{ user.mssv}</p>
               <div className="margin-20px-top team-single-icons">
-                <ul className="no-margin">
-                  <li><a href="javascript:void(0)"><i className="fab fa-facebook-f"></i></a></li>
-                  <li><a href="javascript:void(0)"><i className="fab fa-twitter"></i></a></li>
-                  <li><a href="javascript:void(0)"><i className="fab fa-google-plus-g"></i></a></li>
-                  <li><a href="javascript:void(0)"><i className="fab fa-instagram"></i></a></li>
-                </ul>
+                <ModalDuc />
+
               </div>
             </div>
           </div>
@@ -146,6 +157,7 @@ export default function Cv() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )
