@@ -3,17 +3,15 @@ import React, { useState } from 'react';
 function Contact() {
   const [fullName, setFullName] = useState('');
   const [mssv, setMssv] = useState('');
-
+  const [submittedData, setSubmittedData] = useState(null);
 
   const handleSaveChanges = () => {
-    console.log(fullName, mssv);
+    // Cập nhật submittedData với dữ liệu mới
+    setSubmittedData({ fullName, mssv });
   };
+
   return (
     <div className="col-6 offset-3">
-      {/* <h1>
-        <p>Full Name: {fullName}</p>
-        <p>mssv: {mssv}</p>
-      </h1> */}
       <div className="card">
         <div className="card-body">
           <div className="row mb-3">
@@ -51,6 +49,13 @@ function Contact() {
           </div>
         </div>
       </div>
+      {/* Hiển thị dữ liệu đã submit */}
+      {submittedData && (
+        <div>
+          <p>Full Name: {submittedData.fullName}</p>
+          <p>MSSV: {submittedData.mssv}</p>
+        </div>
+      )}
     </div>
   );
 }
