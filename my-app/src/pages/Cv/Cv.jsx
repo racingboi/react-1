@@ -5,10 +5,15 @@ import './style.css';
 import ModalDuc from '../../component/Modal/Modal';
 export default function Cv() {
   const storedUser = localStorage.getItem('user');
+  if (!storedUser) {
+    const user = {
+      'name': 'Trương Công Đức',
+      'mssv': 'PK03303'
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+  }
   const [user, setUser] = useState(JSON.parse(storedUser));
-  // lấy dữ liệu trong localStorage
- 
-  // chuyển từ chuối qua object(đối tượng) 
+
   useEffect(() => {
     setUser(JSON.parse(storedUser));
   }, [user]); 
@@ -17,7 +22,7 @@ export default function Cv() {
   }, []);
   
   return (
-    <div id="print-section">
+    <div id="print-section" className='py-5'>
       
     <div className="container">
       <div className="team-single">
@@ -27,7 +32,7 @@ export default function Cv() {
               <img className='w-100' src="https://scontent.fbmv1-1.fna.fbcdn.net/v/t39.30808-1/271687508_448485783593541_8314626224747176482_n.jpg?stp=dst-jpg_p240x240&_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=XWBJXAzl72cAX-I6aoK&_nc_ht=scontent.fbmv1-1.fna&oh=00_AfDhOUh2okBLQ_cAtRrnaU1jgN_6D5lyhm2xAVUcbbLPbQ&oe=65F06A9A" alt="" />
             </div>
             <div className="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
-              <h4 className="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">{ user.name}</h4>
+                <h4 className="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">{ user.name}</h4>
               <p className="sm-width-95 sm-margin-auto">{ user.mssv}</p>
               <div className="margin-20px-top team-single-icons">
                 <ModalDuc />

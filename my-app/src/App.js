@@ -1,24 +1,16 @@
-import { Route } from 'react-router-dom';
+
 import './App.css';
 import MainRoute from './routes/MainRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from '@emotion/react';
-import { Fab, SpeedDial, SpeedDialIcon, createTheme } from '@mui/material';
+import { SpeedDial, SpeedDialIcon, createTheme } from '@mui/material';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import { useCallback, useState } from 'react';
 import PrintIcon from '@mui/icons-material/Print';
 function App() {
-  const storedUser = localStorage.getItem('user');
-  if (!storedUser) {
-    const user = {
-      'name': 'Trương Công Đức',
-      'mssv': 'PK03303'
-    }
-    localStorage.setItem('user', JSON.stringify(user));
-  }
   const [theme, setTheme] = useState(createTheme({
     palette: {
       mode: 'dark',

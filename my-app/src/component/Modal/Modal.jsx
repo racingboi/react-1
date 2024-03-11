@@ -2,8 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { FormControl, FormHelperText, Input, InputLabel, Stack } from '@mui/material';
+import { FormControl, Input, InputLabel, Stack } from '@mui/material';
 import { Bounce, toast } from 'react-toastify';
 
 const style = {
@@ -27,7 +26,7 @@ export default function ModalDuc() {
   const [mssv, setMssv] = React.useState("");
   const handleUser = () => {
     if (name == '' || mssv == '') {
-      toast.error('Khong dc bo trong!', {
+      toast.error('Không Được bỏ trống!', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -44,7 +43,7 @@ export default function ModalDuc() {
         'mssv': mssv
       }
       localStorage.setItem('user', JSON.stringify(user));
-      toast.success('thanh cong!', {
+      toast.success('Sửa Thành Công!', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -66,6 +65,7 @@ export default function ModalDuc() {
   }
   const handleMssvChange = (event) => {
     setMssv(event.target.value);
+    
     // console.log("🚀 ~ handleNameChange ~ event.target.value:", event.target.value)
   }
   return (
