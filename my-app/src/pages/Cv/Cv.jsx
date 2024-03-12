@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react' 
+import React, { useEffect, useState } from 'react' 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
@@ -17,13 +17,8 @@ export default function Cv() {
   useEffect(() => {
     setUser(JSON.parse(storedUser));
   }, [user]); 
-  const printDocument = useCallback(() => {
-    window.print();
-  }, []);
-  
   return (
-    <div id="print-section" className='py-5'>
-      
+    <div id="print-section" className='py-5'>  
     <div className="container">
       <div className="team-single">
         <div className="row">

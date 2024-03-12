@@ -25,7 +25,7 @@ export default function ModalDuc() {
   const [name, setName] = React.useState("");
   const [mssv, setMssv] = React.useState("");
   const handleUser = () => {
-    if (name == '' || mssv == '') {
+    if (name === '' || mssv === '') {
       toast.error('Không Được bỏ trống!', {
         position: "top-right",
         autoClose: 5000,
