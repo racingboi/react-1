@@ -15,8 +15,6 @@ function Contact() {
       'mssv': mssv
     }
     localStorage.setItem('user', JSON.stringify(user));
-    // lưu user vào localStorage
-    // setSubmittedData({ fullName, mssv });
     toast.success('Sửa thành công!', {
       position: "top-right",
       autoClose: 5000,
@@ -29,8 +27,6 @@ function Contact() {
       transition: Bounce,
     });
     navigate('/cv');
-    // chuyển trang đến /cv sau khi click save changes
-    
   };
   return (
     <div className="col-6 offset-3">

@@ -12,12 +12,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import {useNavigate } from 'react-router-dom';
 import './style.css';
 const pages = ['Home', 'cv', 'login','register'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
+const user = JSON.parse(localStorage.getItem('user'));
 function Header() {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -35,7 +36,26 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const handleMenuItemClick = (setting) => {
+    handleCloseUserMenu();
+    switch (setting) {
+      case 'Profile':
+        navigate('/');
+        break;
+      case 'Account':
+        navigate('/');
+        break;
+      case 'Dashboard':
+        navigate('/');
+        break;
+      case 'Logout':
+        localStorage.removeItem('user');
+        navigate('/login');
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -118,18 +138,21 @@ function Header() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                onClick={() => {
+                  handleCloseNavMenu();
+                  navigate(`/${page.toLowerCase()}`);
+                }}
+                sx={{ my: 2, color: 'white', display: 'block', textDecoration: 'none' }}
               >
-                <Link to={`/${page.toLowerCase()}`} className="link"> {page}</Link>
+                {page}
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title={user.username}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="https://scontent.fdad3-5.fna.fbcdn.net/v/t39.30808-1/271687508_448485783593541_8314626224747176482_n.jpg?stp=dst-jpg_p240x240&_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=9g2MNEvkXMoAX-yP0wN&_nc_ht=scontent.fdad3-5.fna&oh=00_AfBMVpFgmbDTmD2wE8tJdVFbKD25ZIHMs3HE-11A81wgzw&oe=65F45F1A" />
+                {user && <Avatar alt="Avatar" src={user.img} />}
               </IconButton>
             </Tooltip>
             <Menu
@@ -149,7 +172,7 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={() => handleMenuItemClick(setting)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
