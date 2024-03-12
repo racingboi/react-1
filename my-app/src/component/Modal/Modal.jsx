@@ -17,15 +17,27 @@ const style = {
   p: 4,
 };
 
-export default function ModalDuc() {
+export default function ModalDuc({ onUpdateUser }) {
   // console.log(user);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [name, setName] = React.useState("");
   const [mssv, setMssv] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const storedUser = localStorage.getItem('user');
+  if (!storedUser) {
+    const user = {
+      'name': 'Trương Công Đức',
+      'mssv': 'PK03303',
+      'phone': '0706252156',
+      'address':'160 Ymoan, bmt'
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+  }
   const handleUser = () => {
-    if (name === '' || mssv === '') {
+    if (name === '' || mssv === ''|| phone === ''|| address === '') {
       toast.error('Không Được bỏ trống!', {
         position: "top-right",
         autoClose: 5000,
@@ -40,9 +52,12 @@ export default function ModalDuc() {
     } else {
       const user = {
         'name': name,
-        'mssv': mssv
+        'mssv': mssv,
+        'phone': phone,
+        'address': address
       }
       localStorage.setItem('user', JSON.stringify(user));
+      onUpdateUser(user); // Gọi hàm onUpdateUser để cập nhật thông tin người dùng ở component cha
       toast.success('Sửa Thành Công!', {
         position: "top-right",
         autoClose: 5000,
@@ -60,13 +75,15 @@ export default function ModalDuc() {
 }
   const handleNameChange = (event) => {
     setName(event.target.value);
-
-    // console.log("🚀 ~ handleNameChange ~ event.target.value:", event.target.value)
   }
   const handleMssvChange = (event) => {
     setMssv(event.target.value);
-    
-    // console.log("🚀 ~ handleNameChange ~ event.target.value:", event.target.value)
+  }
+  const handlePhoneChange=(event) => { 
+    setPhone(event.target.value);
+  }
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
   }
   return (
     <div>
@@ -81,15 +98,23 @@ export default function ModalDuc() {
         <Box sx={style}>
           <Stack spacing={2}>
             <FormControl>
-              <InputLabel htmlFor="my-input" >ten</InputLabel>
-              <Input id="my-input" onChange={handleNameChange} aria-describedby="my-helper-text" />
+              <InputLabel htmlFor="my-input">Tên</InputLabel>
+              <Input id="my-input" value={name} onChange={handleNameChange} aria-describedby="my-helper-text" />
             </FormControl>
             <FormControl>
-              <InputLabel htmlFor="mssv" >mssv</InputLabel>
-              <Input id="mssv" onChange={handleMssvChange} aria-describedby="my-helper-text" />
+              <InputLabel htmlFor="mssv">MSSV</InputLabel>
+              <Input id="mssv" value={mssv} onChange={handleMssvChange} aria-describedby="my-helper-text" />
             </FormControl>
-            <Button variant="contained" onClick={handleUser}>Contained</Button>
-            </Stack>
+            <FormControl>
+              <InputLabel htmlFor="phone">phone</InputLabel>
+              <Input id="phone" value={phone} onChange={handlePhoneChange} aria-describedby="my-helper-text" />
+            </FormControl>
+            <FormControl>
+              <InputLabel htmlFor="address">address</InputLabel>
+              <Input id="address" value={address} onChange={handleAddressChange} aria-describedby="my-helper-text" />
+            </FormControl>
+            <Button variant="contained" onClick={handleUser}>Lưu thông tin</Button>
+          </Stack>
         </Box>
       </Modal>
     </div>

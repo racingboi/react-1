@@ -4,19 +4,31 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import ModalDuc from '../../component/Modal/Modal';
 export default function Cv() {
-  const storedUser = localStorage.getItem('user');
-  if (!storedUser) {
-    const user = {
-      'name': 'Trương Công Đức',
-      'mssv': 'PK03303'
-    }
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-  const [user, setUser] = useState(JSON.parse(storedUser));
+  const [name, setName] = useState("");
+  const [mssv, setMssv] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = React.useState("");
 
   useEffect(() => {
-    setUser(JSON.parse(storedUser));
-  }, [user]); 
+    // Lấy dữ liệu từ localStorage khi component được mount
+    const userData = localStorage.getItem('user');
+
+    if (userData) {
+      const parsedUserData = JSON.parse(userData);
+      setName(parsedUserData.name);
+      setMssv(parsedUserData.mssv);
+      setPhone(parsedUserData.phone);
+      setAddress(parsedUserData.address);
+    }
+  }, []);
+  const onUpdateUser = (updatedUser) => {
+    // Cập nhật thông tin người dùng khi được gọi từ ModalDuc
+    setName(updatedUser.name);
+    setMssv(updatedUser.mssv);
+    setPhone(updatedUser.phone);
+    setPhone(updatedUser.address);
+
+  };
   return (
     <div id="print-section" className='py-5'>  
     <div className="container">
@@ -27,10 +39,10 @@ export default function Cv() {
               <img className='w-100' src="https://scontent.fbmv1-1.fna.fbcdn.net/v/t39.30808-1/271687508_448485783593541_8314626224747176482_n.jpg?stp=dst-jpg_p240x240&_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=XWBJXAzl72cAX-I6aoK&_nc_ht=scontent.fbmv1-1.fna&oh=00_AfDhOUh2okBLQ_cAtRrnaU1jgN_6D5lyhm2xAVUcbbLPbQ&oe=65F06A9A" alt="" />
             </div>
             <div className="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
-                <h4 className="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">{ user.name}</h4>
-              <p className="sm-width-95 sm-margin-auto">{ user.mssv}</p>
+                <h4 className="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">{ name}</h4>
+              <p className="sm-width-95 sm-margin-auto">{ mssv}</p>
               <div className="margin-20px-top team-single-icons">
-                <ModalDuc />
+                  <ModalDuc onUpdateUser={onUpdateUser} />
 
               </div>
             </div>
@@ -82,7 +94,7 @@ export default function Cv() {
                         <strong className="margin-10px-left text-green">Address:</strong>
                       </div>
                       <div className="col-md-7 col-7">
-                        <p>160 Ymoan, bmt</p>
+                          <p>{ address}</p>
                       </div>
                     </div>
                   </li>
@@ -93,7 +105,7 @@ export default function Cv() {
                         <strong className="margin-10px-left xs-margin-four-left text-purple">Phone:</strong>
                       </div>
                       <div className="col-md-7 col-7">
-                        <p>0706252156</p>
+                          <p>{phone}</p>
                       </div>
                     </div>
                   </li>
@@ -115,42 +127,42 @@ export default function Cv() {
                 <div className="progress-text">
                   <div className="row">
                     <div className="col-7">HTML-CSS</div>
-                    <div className="col-5 text-right">40%</div>
+                    <div className="col-5 text-right">10%</div>
                   </div>
                 </div>
                 <div className="custom-progress progress">
-                  <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{ width: '40%' }}
+                  <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{ width: '10%' }}
                     className="animated custom-bar progress-bar slideInLeft bg-sky"></div>
                 </div>
                 <div className="progress-text">
                   <div className="row">
                     <div className="col-7">JS</div>
-                    <div className="col-5 text-right">50%</div>
+                    <div className="col-5 text-right">10%</div>
                   </div>
 
                 </div>
                 <div className="custom-progress progress">
-                  <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{ width: '50%' }}
+                  <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{ width: '10%' }}
                     className="animated custom-bar progress-bar slideInLeft bg-orange"></div>
                 </div>
                 <div className="progress-text">
                   <div className="row">
                     <div className="col-7">PHP</div>
-                    <div className="col-5 text-right">60%</div>
+                    <div className="col-5 text-right">10%</div>
                   </div>
                 </div>
                 <div className="custom-progress progress">
-                  <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{ width: '60%' }}
+                  <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{ width: '10%' }}
                     className="animated custom-bar progress-bar slideInLeft bg-green"></div>
                 </div>
                 <div className="progress-text">
                   <div className="row">
                     <div className="col-7">LARAVEL</div>
-                    <div className="col-5 text-right">80%</div>
+                    <div className="col-5 text-right">10%</div>
                   </div>
                 </div>
                 <div className="custom-progress progress">
-                  <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{ width: '80%' }}
+                  <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{ width: '10%' }}
                     className="animated custom-bar progress-bar slideInLeft bg-yellow"></div>
                 </div>
               </div>

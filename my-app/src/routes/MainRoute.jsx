@@ -5,7 +5,8 @@ import Contact from '../pages/Contact/Contact'
 import Cv from '../pages/Cv/Cv'
 import Header from '../component/Header/Header'
 import Footer from '../component/Footer/Footer'
-import PrintComponent from '../pages/text/test'
+import Login from '../pages/login/login'
+import Register from '../pages/register/Register'
 
 export default function MainRoute() {
   return (
@@ -16,7 +17,8 @@ export default function MainRoute() {
       <Route path='/' element={<Home />} />
       <Route path='/contact' element={<Contact />} />
       <Route path='/cv' element={<Cv />} />
-        <Route path='/test' element={<PrintComponent/>} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
       <Footer/>
     </>

@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './style.css';
-const pages = ['Home', 'cv'];
+const pages = ['Home', 'cv', 'login','register'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Header() {
